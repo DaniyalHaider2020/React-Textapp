@@ -109,32 +109,32 @@ export default function TextForm(props) {
           ></textarea>
         </div>
 
-        <button className="btn btn-primary mx-2"onClick={handleUpClick}>
+        <button className="btn btn-primary mx-2 my-1" onClick={handleCopyText}>
+          Copy Text
+        </button>
+
+        <button className="btn btn-primary mx-2 my-1"onClick={handleUpClick}>
             Convert to Upper Case
         </button>
 
-        <button className="btn btn-primary mx-3 my-3" onClick={handleDownClick}>
+        <button className="btn btn-primary mx-2 my-1" onClick={handleDownClick}>
           Convert to Lower Case
-        </button>
-
-        <button className="btn btn-primary mx-2" onClick={handleCopyText}>
-          Copy Text
         </button>
 
         {/* <button className="btn btn-primary mx-2" onClick={handleTextToSpeech}>
           Speak Text
         </button> */}
 
-        <button className="btn btn-primary mx-2" onClick={handlecleartext}>
-          Clear Text
-        </button>
-
-        <button className="btn btn-primary mx-2" onClick={handleRemoveExtraSpaces}>
+        <button className="btn btn-primary mx-2 my-1" onClick={handleRemoveExtraSpaces}>
           Remove Extra Spaces
         </button>
 
-        <button className='btn btn-primary mx-2' onClick={handledownload}>
+        <button className='btn btn-primary mx-2 my-1' onClick={handledownload}>
           Download Text
+        </button>
+
+        <button className="btn btn-primary mx-2 my-1" onClick={handlecleartext}>
+          Clear Text
         </button>
 
       </div>
