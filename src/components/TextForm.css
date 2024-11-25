@@ -1,0 +1,104 @@
+/* General Container Styling */
+.container {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings */
+h1, h2 {
+  color: #333;
+  font-family: 'Arial', sans-serif;
+  margin-bottom: 20px;
+}
+
+/* Textarea Styling */
+textarea#MyBox {
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+}
+
+/* Buttons */
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+/* Primary Buttons */
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Secondary Buttons */
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+/* Find and Replace Section */
+.find-replace-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.find-replace-container input {
+  width: 200px; /* Adjust input width */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Word Occurrence Section */
+.container.my-3 input {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Summary Section */
+.container.my-2 {
+  margin-top: 20px;
+}
+
+.container.my-2 p {
+  font-size: 16px;
+  color: #555;
+}
+
+p strong {
+  color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .find-replace-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .container.my-3 input {
+    width: 100%;
+  }
+}
