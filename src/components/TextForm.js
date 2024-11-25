@@ -6,7 +6,6 @@ export default function TextForm(props) {
     let newtext = text.toUpperCase();
     setText(newtext);
     props.showalert ("Converted to UpperCase!","success");
-    console.log ("uppercase alert");
   };
 
   const handleDownClick = () => {
@@ -39,35 +38,17 @@ export default function TextForm(props) {
     setText(newText);
     props.showalert ("Extra spaces has been removed","success");
   };
-  
-  const handleTextToSpeech = () => {
-    if (!text.trim()) {
-      alert('Please enter some text to speak!');
-      return;
-    }
-  
-    let speech = new SpeechSynthesisUtterance(text);
-  
-    // Set language
-    speech.lang = 'en-US';
-  
-    // Set a voice
-    const voices = window.speechSynthesis.getVoices();
-    if (voices.length > 0) {
-      speech.voice = voices[0];
-    }
-  
-    // Speak the text
-    window.speechSynthesis.speak(speech);
+
+  const handleCopyText = () => {
+    navigator.clipboard.writeText(text);
+    props.showalert("Text copied to clipboard!","success");
   };
-  
-  // Count Specific Word Occurrence
+
   const handleWordCount = () => {
     if (!wordToFind.trim()) {
       alert('Please enter a word to find!');
       return;
     }
-
     const count = text.toLowerCase().split(' ').filter((word) => word === wordToFind.toLowerCase()).length;
     setWordCount(count);
   };
@@ -86,7 +67,24 @@ export default function TextForm(props) {
     setText(newText);
     alert(`Replaced all occurrences of "${wordToFind}" with "${wordToReplace}"`);
   };
-
+  
+  // const handleTextToSpeech = () => {
+  //   if (!text.trim()) {
+  //     alert('Please enter some text to speak!');
+  //     return;
+  //   }
+  //   let speech = new SpeechSynthesisUtterance(text);
+  //   // Set language
+  //   speech.lang = 'en-US';
+  //   // Set a voice
+  //   const voices = window.speechSynthesis.getVoices();
+  //   if (voices.length > 0) {
+  //     speech.voice = voices[0];
+  //   }
+  //   // Speak the text
+  //   window.speechSynthesis.speak(speech);
+  // };
+  
   const [text, setText] = useState('Enter your text here');
   const [wordToFind, setWordToFind] = useState('');
   const [wordCount, setWordCount] = useState(0);
@@ -110,27 +108,22 @@ export default function TextForm(props) {
             rows="8"
           ></textarea>
         </div>
-        <button
-          className="btn btn-primary mx-2"
-          onClick={handleUpClick}
-        >
-          Convert to Upper Case
+
+        <button className="btn btn-primary mx-2"onClick={handleUpClick}>
+            Convert to Upper Case
         </button>
-        <button
-          className="btn btn-primary mx-3 my-3"
-          onClick={handleDownClick}
-        >
+
+        <button className="btn btn-primary mx-3 my-3" onClick={handleDownClick}>
           Convert to Lower Case
         </button>
-        <button 
-          className='btn btn-secondary mx-2'
-          onClick={handledownload}
-        >
-          Download Text
+
+        <button className="btn btn-primary mx-2" onClick={handleCopyText}>
+          Copy Text
         </button>
-        <button className="btn btn-primary mx-2" onClick={handleTextToSpeech}>
+
+        {/* <button className="btn btn-primary mx-2" onClick={handleTextToSpeech}>
           Speak Text
-        </button>
+        </button> */}
 
         <button className="btn btn-primary mx-2" onClick={handlecleartext}>
           Clear Text
@@ -140,15 +133,33 @@ export default function TextForm(props) {
           Remove Extra Spaces
         </button>
 
+        <button className='btn btn-primary mx-2' onClick={handledownload}>
+          Download Text
+        </button>
+
+      </div>
+
+      <div className="container my-2" style= {{backgroundColor: props.Mode==='dark'?'grey':'white',
+                    color: props.Mode==='dark'?'White':'Black'}}>
+        <h2 style= {{backgroundColor: props.Mode==='dark'?'grey':'white',color: props.Mode==='dark'?'White':'Black'}}> 
+                       Your Text Summary</h2>
+
+        <p style= {{backgroundColor: props.Mode==='dark'?'grey':'white',color: props.Mode==='dark'?'White':'Black'}}>
+                      Number of words: {text.split(/\s+/).filter((element)=>{ //filter array method jo return krta ha true ya false based on us filter me jo array element gya ha uspy
+                      return element.length!==0}).length}</p>
+
+        <p style= {{backgroundColor: props.Mode==='dark'?'grey':'white',color: props.Mode==='dark'?'White':'Black'}}>
+                       Number of characters: {text.length}</p>
+
+        <p style= {{backgroundColor: props.Mode==='dark'?'grey':'white', color: props.Mode==='dark'?'White':'Black'}}>
+                      Time required to read the text is: {0.008*text.split(/\s+/).filter((element)=>{ 
+                      return element.length!==0}).length} minutes </p>
       </div>
 
       {/* Count Specific Word Occurrence Feature */}
-      <div className="container my-3"  style= {{backgroundColor: props.Mode==='dark'?'grey':'white',
-                    color: props.Mode==='dark'?'White':'Black'
-            }}>
-        <h2  style= {{backgroundColor: props.Mode==='dark'?'grey':'white',
-                    color: props.Mode==='dark'?'White':'Black'}}> 
-                        Count Specific Word Occurrence</h2>
+      <div className="container my-3"  style= {{backgroundColor: props.Mode==='dark'?'grey':'white', color: props.Mode==='dark'?'White':'Black'}}>
+        <h2  style= {{backgroundColor: props.Mode==='dark'?'grey':'white', color: props.Mode==='dark'?'White':'Black'}}> 
+                 Count Specific Word Occurrence  </h2>
         <div className="mb-3">
           <input
             type="text"
@@ -170,10 +181,9 @@ export default function TextForm(props) {
         </div>
 
         {/* Find and Replace Feature */}
-      <div className="container my-3" style= {{backgroundColor: props.Mode==='dark'?'grey':'white',
-                    color: props.Mode==='dark'?'White':'Black'}}>
-        <h2 style= {{backgroundColor: props.Mode==='dark'?'grey':'white',
-                    color: props.Mode==='dark'?'White':'Black'}}>Find and Replace</h2>
+      <div className="container my-3" style= {{backgroundColor: props.Mode==='dark'?'grey':'white',color: props.Mode==='dark'?'White':'Black'}}>
+        <h2 style= {{backgroundColor: props.Mode==='dark'?'grey':'white',color: props.Mode==='dark'?'White':'Black'}}>
+            Find and Replace</h2>
         <div className="mb-3">
           <input
             type="text"
@@ -183,6 +193,7 @@ export default function TextForm(props) {
             onChange={(e) => setWordToFind(e.target.value)}
           />
         </div>
+
         <div className="mb-3">
           <input
             type="text"
@@ -195,18 +206,6 @@ export default function TextForm(props) {
         <button className="btn btn-primary mx-2" onClick={handleFindAndReplace}>
           Find and Replace
         </button>
-      </div>
-
-      <div className="container my-2" style= {{backgroundColor: props.Mode==='dark'?'grey':'white',
-                    color: props.Mode==='dark'?'White':'Black'}}>
-        <h1 style= {{backgroundColor: props.Mode==='dark'?'grey':'white',
-                    color: props.Mode==='dark'?'White':'Black'}}> Your Text Summary</h1>
-        <p style= {{backgroundColor: props.Mode==='dark'?'grey':'white',
-                    color: props.Mode==='dark'?'White':'Black'}}>Number of words: {text.split(" ").length}</p>
-        <p style= {{backgroundColor: props.Mode==='dark'?'grey':'white',
-                    color: props.Mode==='dark'?'White':'Black'}}>Number of characters: {text.length}</p>
-        <p style= {{backgroundColor: props.Mode==='dark'?'grey':'white',
-                    color: props.Mode==='dark'?'White':'Black'}}>Time required to read the text is: {0.008*text.split(" ").length} minutes </p>
       </div>
     </>
   );
